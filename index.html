@@ -8,20 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #06040f;
-    --surface: #0e0a1e;
-    --border: #1e1535;
-    --accent: #a78bfa;
-    --accent2: #7c3aed;
-    --accent3: #c4b5fd;
-    --text: #e8e0ff;
-    --muted: #7b6fa0;
-    --code-bg: #120d24;
-    --glow: rgba(167,139,250,0.18);
+    --bg: #080810;
+    --surface: #0f0f1a;
+    --surface2: #13131f;
+    --border: #1c1c2e;
+    --border-hi: #2e2e4a;
+    --accent: #818cf8;
+    --accent2: #4f46e5;
+    --accent3: #a5b4fc;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --muted-hi: #94a3b8;
+    --code-bg: #0c0c18;
+    --glow: rgba(79,70,229,0.14);
+    --glow-hi: rgba(129,140,248,0.12);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -31,7 +34,7 @@
     overflow-x: hidden;
   }
 
-  /* ---- NOISE OVERLAY ---- */
+  /* Subtle grain */
   body::before {
     content: '';
     position: fixed;
@@ -39,7 +42,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 999;
-    opacity: 0.35;
+    opacity: 0.25;
   }
 
   /* ---- NAV ---- */
@@ -51,16 +54,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(6,4,15,0.7);
-    backdrop-filter: blur(16px);
+    background: rgba(8,8,16,0.75);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
   }
 
   .nav-logo {
     font-family: 'Space Mono', monospace;
-    font-size: 1rem;
-    color: var(--accent);
-    letter-spacing: 0.08em;
+    font-size: 0.9rem;
+    color: var(--accent3);
+    letter-spacing: 0.06em;
   }
 
   .nav-links {
@@ -72,14 +75,14 @@
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--text); }
 
   /* ---- HERO ---- */
   #hero {
@@ -95,71 +98,72 @@
   .hero-bg-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
+    filter: blur(90px);
     pointer-events: none;
   }
 
   .orb1 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(124,58,237,0.3), transparent 70%);
-    top: -100px; left: 50%;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(79,70,229,0.22), transparent 70%);
+    top: -80px; left: 50%;
     transform: translateX(-50%);
-    animation: pulse 6s ease-in-out infinite;
+    animation: pulse 7s ease-in-out infinite;
   }
 
   .orb2 {
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(167,139,250,0.15), transparent 70%);
-    bottom: 100px; right: 10%;
-    animation: pulse 8s ease-in-out infinite reverse;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(129,140,248,0.1), transparent 70%);
+    bottom: 120px; right: 8%;
+    animation: pulse2 9s ease-in-out infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { transform: scale(1) translateX(-50%); opacity: 0.8; }
-    50% { transform: scale(1.1) translateX(-50%); opacity: 1; }
+    0%, 100% { opacity: 0.7; transform: scale(1) translateX(-50%); }
+    50% { opacity: 1; transform: scale(1.08) translateX(-50%); }
   }
-
-  .orb2 { animation-name: pulse2; }
   @keyframes pulse2 {
-    0%, 100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.15); opacity: 1; }
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.12); }
   }
 
-  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-content { position: relative; z-index: 2; max-width: 820px; }
 
   .hero-tag {
     display: inline-block;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--accent);
-    border: 1px solid var(--accent2);
-    padding: 0.3rem 0.9rem;
+    font-size: 0.72rem;
+    color: var(--accent3);
+    border: 1px solid var(--border-hi);
+    padding: 0.3rem 1rem;
     border-radius: 999px;
-    letter-spacing: 0.12em;
-    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.8rem;
     animation: fadeUp 0.8s ease both;
+    background: rgba(129,140,248,0.06);
   }
 
   .hero-name {
     font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--text);
     animation: fadeUp 0.8s 0.1s ease both;
   }
 
   .hero-name span {
-    background: linear-gradient(135deg, #a78bfa, #7c3aed, #c4b5fd);
+    /* indigo gradient, less purple-saturated */
+    background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 40%, #6366f1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .hero-subtitle {
-    font-size: 1.15rem;
-    color: var(--muted);
-    margin: 1.2rem 0 2.5rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    color: var(--muted-hi);
+    margin: 1.4rem 0 2.8rem;
+    line-height: 1.75;
     animation: fadeUp 0.8s 0.2s ease both;
   }
 
@@ -178,7 +182,7 @@
     padding: 0.75rem 1.8rem;
     border-radius: 8px;
     font-family: 'Syne', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 700;
     text-decoration: none;
     transition: all 0.2s;
@@ -188,32 +192,32 @@
 
   .btn-primary {
     background: var(--accent2);
-    color: white;
-    box-shadow: 0 0 24px var(--glow);
+    color: #e0e7ff;
+    box-shadow: 0 0 28px rgba(79,70,229,0.3);
   }
 
   .btn-primary:hover {
-    background: #6d28d9;
-    box-shadow: 0 0 40px rgba(124,58,237,0.5);
+    background: #4338ca;
+    box-shadow: 0 0 44px rgba(79,70,229,0.45);
     transform: translateY(-2px);
   }
 
   .btn-outline {
     background: transparent;
-    color: var(--accent3);
-    border: 1px solid var(--border);
+    color: var(--muted-hi);
+    border: 1px solid var(--border-hi);
   }
 
   .btn-outline:hover {
     border-color: var(--accent);
-    color: var(--accent);
-    background: var(--glow);
+    color: var(--text);
+    background: var(--glow-hi);
     transform: translateY(-2px);
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   /* ---- SECTIONS ---- */
@@ -225,26 +229,29 @@
 
   .section-label {
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.7rem;
+    opacity: 0.85;
   }
 
   .section-title {
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(2rem, 4vw, 2.6rem);
     font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
   }
 
   .section-divider {
-    width: 60px;
-    height: 3px;
+    width: 48px;
+    height: 2px;
     background: linear-gradient(to right, var(--accent2), var(--accent));
     border-radius: 2px;
-    margin: 1rem 0 2.5rem;
+    margin: 1rem 0 2.8rem;
+    opacity: 0.7;
   }
 
   /* ---- ABOUT ---- */
@@ -256,21 +263,24 @@
   }
 
   .about-text p {
-    color: #b8adda;
-    line-height: 1.85;
-    font-size: 1rem;
+    color: var(--muted-hi);
+    line-height: 1.9;
+    font-size: 0.97rem;
     margin-bottom: 1rem;
   }
+
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .about-text em { color: var(--accent3); font-style: normal; }
 
   .about-code {
     background: var(--code-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1.6rem;
     font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-    line-height: 1.8;
-    color: #c4b5fd;
+    font-size: 0.76rem;
+    line-height: 1.85;
+    color: #a5b4fc;
     position: relative;
     overflow: hidden;
   }
@@ -279,66 +289,57 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
+    height: 1.5px;
     background: linear-gradient(to right, var(--accent2), var(--accent));
+    opacity: 0.6;
   }
 
-  .code-comment { color: #4a3d6e; }
+  .code-comment { color: #334155; }
   .code-keyword { color: #f472b6; }
-  .code-string { color: #86efac; }
-  .code-var { color: #7dd3fc; }
+  .code-string  { color: #86efac; }
+  .code-var     { color: #7dd3fc; }
 
   /* ---- SKILLS ---- */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
   }
 
   .skill-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 1.5rem;
-    transition: all 0.25s;
+    padding: 1.4rem;
+    transition: all 0.22s;
     position: relative;
     overflow: hidden;
   }
 
-  .skill-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--glow), transparent);
-    opacity: 0;
-    transition: opacity 0.25s;
+  .skill-card:hover {
+    border-color: var(--border-hi);
+    background: var(--surface2);
+    transform: translateY(-2px);
   }
-
-  .skill-card:hover::before { opacity: 1; }
-  .skill-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
 
   .skill-category {
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    color: var(--accent);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--muted-hi);
     text-transform: uppercase;
     margin-bottom: 1rem;
   }
 
-  .skill-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+  .skill-badges { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 
   .badge {
-    background: rgba(124,58,237,0.15);
-    border: 1px solid rgba(167,139,250,0.2);
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(129,140,248,0.18);
     color: var(--accent3);
-    padding: 0.3rem 0.7rem;
-    border-radius: 6px;
-    font-size: 0.78rem;
+    padding: 0.28rem 0.65rem;
+    border-radius: 5px;
+    font-size: 0.76rem;
     font-weight: 600;
   }
 
@@ -346,7 +347,7 @@
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.8rem;
+    gap: 1.6rem;
   }
 
   .project-card {
@@ -365,32 +366,46 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(to right, var(--accent2), var(--accent));
+    height: 1.5px;
+    background: var(--card-line, linear-gradient(to right, var(--accent2), var(--accent)));
     transform: scaleX(0);
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
     transform-origin: left;
   }
 
-  .project-card:hover { border-color: var(--accent2); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .project-card:hover {
+    border-color: var(--border-hi);
+    background: var(--surface2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+
   .project-card:hover::after { transform: scaleX(1); }
 
+  /* Per-card accent lines */
+  .project-card:nth-child(1) { --card-line: linear-gradient(to right, #4f46e5, #818cf8); }
+  .project-card:nth-child(2) { --card-line: linear-gradient(to right, #0ea5e9, #38bdf8); }
+  .project-card:nth-child(3) { --card-line: linear-gradient(to right, #10b981, #34d399); }
+  .project-card:nth-child(4) { --card-line: linear-gradient(to right, #f59e0b, #fbbf24); }
+
   .project-icon {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-bottom: 1rem;
+    line-height: 1;
   }
 
   .project-name {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    margin-bottom: 0.6rem;
-    color: white;
+    margin-bottom: 0.55rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
   }
 
   .project-desc {
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.75;
     flex: 1;
     margin-bottom: 1.2rem;
   }
@@ -403,12 +418,12 @@
   }
 
   .project-tag {
-    background: rgba(167,139,250,0.08);
-    border: 1px solid rgba(167,139,250,0.15);
-    color: #a78bfa;
-    padding: 0.2rem 0.6rem;
+    background: rgba(99,102,241,0.07);
+    border: 1px solid rgba(129,140,248,0.12);
+    color: var(--muted-hi);
+    padding: 0.2rem 0.55rem;
     border-radius: 4px;
-    font-size: 0.73rem;
+    font-size: 0.71rem;
     font-family: 'Space Mono', monospace;
   }
 
@@ -417,29 +432,26 @@
     align-items: center;
     gap: 0.4rem;
     color: var(--accent);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-decoration: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     transition: color 0.2s;
   }
 
-  .project-link:hover { color: white; }
+  .project-link:hover { color: var(--text); }
   .project-link svg { transition: transform 0.2s; }
   .project-link:hover svg { transform: translate(2px, -2px); }
 
   /* ---- CONTACT ---- */
-  #contact {
-    text-align: center;
-    padding-bottom: 6rem;
-  }
+  #contact { text-align: center; padding-bottom: 6rem; }
 
   .contact-card {
-    max-width: 540px;
+    max-width: 520px;
     margin: 0 auto;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 20px;
+    border-radius: 18px;
     padding: 3rem;
     position: relative;
     overflow: hidden;
@@ -448,42 +460,45 @@
   .contact-card::before {
     content: '';
     position: absolute;
-    top: -80px; left: 50%;
+    top: -60px; left: 50%;
     transform: translateX(-50%);
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(124,58,237,0.2), transparent 70%);
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(79,70,229,0.12), transparent 70%);
     pointer-events: none;
   }
 
   .contact-card p {
-    color: var(--muted);
+    color: var(--muted-hi);
     margin-bottom: 2rem;
-    line-height: 1.7;
+    line-height: 1.75;
+    font-size: 0.95rem;
   }
 
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.9rem; }
 
   .contact-link {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.9rem 1.2rem;
+    padding: 0.85rem 1.2rem;
     background: var(--code-bg);
     border: 1px solid var(--border);
     border-radius: 10px;
-    color: var(--text);
+    color: var(--muted-hi);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
     transition: all 0.2s;
   }
 
-  .contact-link:hover { border-color: var(--accent); background: var(--glow); transform: translateX(4px); }
-  .contact-link-icon { font-size: 1.2rem; }
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    background: rgba(129,140,248,0.06);
+    transform: translateX(4px);
+  }
+
+  .contact-link-icon { font-size: 1.1rem; flex-shrink: 0; }
 
   /* ---- FOOTER ---- */
   footer {
@@ -492,22 +507,21 @@
     text-align: center;
     color: var(--muted);
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
   }
 
   footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { color: var(--text); }
 
   /* ---- SCROLL REVEAL ---- */
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
   }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
@@ -538,20 +552,20 @@
   <div class="hero-bg-orb orb1"></div>
   <div class="hero-bg-orb orb2"></div>
   <div class="hero-content">
-    <span class="hero-tag">👋 Available for Open Source Collaboration</span>
+    <span class="hero-tag">👋 Open to Collaboration &amp; Open Source</span>
     <h1 class="hero-name">Tanveer <span>Kaur</span></h1>
     <p class="hero-subtitle">
-      ML Enthusiast · Systems Builder · Lifelong Learner<br>
+      ML Enthusiast &nbsp;·&nbsp; Systems Builder &nbsp;·&nbsp; Lifelong Learner<br>
       Building intelligent systems at the intersection of machine learning, inference, and C++.
     </p>
     <div class="hero-ctas">
       <a href="#projects" class="btn btn-primary">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
         View Projects
       </a>
       <a href="https://github.com/tanveer-12" target="_blank" class="btn btn-outline">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49v-1.71c-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.27 10.27 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
-        GitHub Profile
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49v-1.71c-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.27 10.27 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
+        GitHub
       </a>
       <a href="mailto:tanveerkaur1292@outlook.com" class="btn btn-outline">
         ✉️ Say Hello
@@ -569,19 +583,20 @@
     <div class="about-grid">
       <div class="about-text">
         <p>Hey! I'm Tanveer — a developer with a deep love for machine learning, systems programming, and building things that actually work under the hood.</p>
-        <p>I believe in learning from first principles. Whether it's implementing a gradient descent algorithm in raw C++ or designing a GPU-aware inference runtime, I like to understand <em>why</em> things work — not just how to use them.</p>
-        <p>I'm currently exploring <strong>semantic search systems</strong>, <strong>LLM inference optimization</strong>, and <strong>ML from scratch in C/C++</strong>. Always looking for meaningful open source projects to contribute to.</p>
-        <p style="color: var(--muted); font-size:0.85rem; font-family:'Space Mono',monospace;">📍 United States &nbsp;·&nbsp; ✉️ tanveerkaur1292@outlook.com</p>
+        <p>I believe in learning from first principles. Whether it's implementing gradient descent in raw C++ or designing a GPU-aware inference runtime, I like to understand <em>why</em> things work — not just how to use them.</p>
+        <p>I'm currently exploring <strong>semantic search systems</strong>, <strong>reinforcement learning</strong>, <strong>LLM inference optimization</strong>, and <strong>ML from scratch in C/C++</strong>. Always looking for meaningful open source projects to contribute to.</p>
+        <p style="color: var(--muted); font-size:0.83rem; font-family:'Space Mono',monospace; margin-top:1.5rem;">📍 United States &nbsp;·&nbsp; ✉️ tanveerkaur1292@outlook.com</p>
       </div>
       <div class="about-code">
-        <span class="code-comment"># A little bit about me</span><br><br>
+        <span class="code-comment"># a little bit about me</span><br><br>
         <span class="code-keyword">class</span> <span class="code-var">Tanveer</span>:<br>
         &nbsp;&nbsp;name = <span class="code-string">"Tanveer Kaur"</span><br>
         &nbsp;&nbsp;passion = [<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"ML Systems"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Reinforcement Learning"</span>,<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"LLM Inference"</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"C++ from scratch"</span>,<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Semantic Search"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"C++ from scratch"</span>,<br>
         &nbsp;&nbsp;]<br>
         &nbsp;&nbsp;currently = <span class="code-string">"Building cool things"</span><br>
         &nbsp;&nbsp;open_to = <span class="code-string">"Collaboration 🤝"</span><br><br>
@@ -618,10 +633,11 @@
           <span class="badge">CUDA</span>
           <span class="badge">LoRA / PEFT</span>
           <span class="badge">RAG</span>
+          <span class="badge">DQN / RL</span>
         </div>
       </div>
       <div class="skill-card">
-        <p class="skill-category">🔧 Backend & Data</p>
+        <p class="skill-category">🔧 Backend &amp; Data</p>
         <div class="skill-badges">
           <span class="badge">FastAPI</span>
           <span class="badge">PostgreSQL</span>
@@ -651,6 +667,7 @@
     <div class="section-divider"></div>
     <div class="projects-grid">
 
+      <!-- 1. personal-knowledge-base -->
       <div class="project-card">
         <div class="project-icon">🔍</div>
         <h3 class="project-name">Personal Knowledge Base</h3>
@@ -660,17 +677,54 @@
           <span class="project-tag">FastAPI</span>
           <span class="project-tag">pgvector</span>
           <span class="project-tag">all-MiniLM-L6-v2</span>
+          <span class="project-tag">Semantic Search</span>
         </div>
         <a href="https://github.com/tanveer-12/personal-knowledge-base" target="_blank" class="project-link">
           View on GitHub
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </a>
       </div>
 
+      <!-- 2. dqn-offer-recommendation -->
+      <div class="project-card">
+        <div class="project-icon">🤖</div>
+        <h3 class="project-name">DQN Offer Recommendation</h3>
+        <p class="project-desc">Deep Q-Network agent for personalized offer recommendation. RL-based sequential decision-making for e-commerce, with replay buffer, target network, and custom reward shaping for click-through optimization.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">PyTorch</span>
+          <span class="project-tag">DQN</span>
+          <span class="project-tag">Reinforcement Learning</span>
+        </div>
+        <a href="https://github.com/tanveer-12/dqn-offer-recommendation" target="_blank" class="project-link">
+          View on GitHub
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+
+      <!-- 3. rl-breakout-dqn -->
+      <div class="project-card">
+        <div class="project-icon">🕹️</div>
+        <h3 class="project-name">RL Breakout DQN</h3>
+        <p class="project-desc">Classic Atari Breakout solved with Deep Q-Learning. A convolutional neural net processes raw pixel frames directly, trained end-to-end using experience replay and an ε-greedy exploration strategy.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">PyTorch</span>
+          <span class="project-tag">OpenAI Gym</span>
+          <span class="project-tag">CNN</span>
+          <span class="project-tag">DQN</span>
+        </div>
+        <a href="https://github.com/tanveer-12/rl-breakout-dqn" target="_blank" class="project-link">
+          View on GitHub
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+
+      <!-- 4. aegis-runtime -->
       <div class="project-card">
         <div class="project-icon">⚡</div>
         <h3 class="project-name">Aegis Runtime</h3>
-        <p class="project-desc">A modular, GPU-aware adaptive inference system for large language models. Dynamically adjusts compute strategy based on available hardware — designed for efficient deployment of large models.</p>
+        <p class="project-desc">A modular, GPU-aware adaptive inference system for large language models. Dynamically adjusts compute strategy based on available hardware — designed for efficient deployment of large models with a pluggable backend architecture.</p>
         <div class="project-tags">
           <span class="project-tag">Python</span>
           <span class="project-tag">CUDA</span>
@@ -679,66 +733,19 @@
         </div>
         <a href="https://github.com/tanveer-12/aegis-runtime" target="_blank" class="project-link">
           View on GitHub
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </a>
       </div>
 
-      <div class="project-card">
-        <div class="project-icon">🤖</div>
-        <h3 class="project-name">ML Models in C/C++</h3>
-        <p class="project-desc">Machine learning algorithms built from scratch using only C and C++ with no external ML libraries. A deep dive into the math beneath modern ML: linear regression, decision trees, and more.</p>
-        <div class="project-tags">
-          <span class="project-tag">C++</span>
-          <span class="project-tag">C</span>
-          <span class="project-tag">From Scratch</span>
-          <span class="project-tag">ML Fundamentals</span>
-        </div>
-        <a href="https://github.com/tanveer-12/Machine-Learning-Models-C-Cpp" target="_blank" class="project-link">
-          View on GitHub
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon">📊</div>
-        <h3 class="project-name">End-to-End ML with DASH</h3>
-        <p class="project-desc">Full machine learning pipeline with interactive dashboards built using Python DASH. Covers everything from data ingestion and model training to real-time interactive visualization.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">DASH</span>
-          <span class="project-tag">Jupyter</span>
-          <span class="project-tag">Data Viz</span>
-        </div>
-        <a href="https://github.com/tanveer-12/End-to-end-ML-model-using-DASH---Python" target="_blank" class="project-link">
-          View on GitHub
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon">🧬</div>
-        <h3 class="project-name">CTMWA Experimental</h3>
-        <p class="project-desc">Crossmodal Translation based Meta Weight Adaptation for robust image-text sentiment analysis. Forked and extended to explore multimodal learning and cross-modal alignment research.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Multimodal</span>
-          <span class="project-tag">Sentiment Analysis</span>
-          <span class="project-tag">NLP</span>
-        </div>
-        <a href="https://github.com/tanveer-12/CTMWA-Experimental" target="_blank" class="project-link">
-          View on GitHub
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-
-      <div class="project-card" style="border-style:dashed;display:flex;align-items:center;justify-content:center;text-align:center;">
+      <!-- More coming soon -->
+      <div class="project-card" style="border-style:dashed;display:flex;align-items:center;justify-content:center;text-align:center;min-height:200px;">
         <div>
-          <div style="font-size:2rem;margin-bottom:0.8rem;">🚧</div>
-          <h3 class="project-name" style="color:var(--muted)">More Coming Soon</h3>
-          <p class="project-desc">Always building something new. Check my GitHub for the latest.</p>
+          <div style="font-size:1.6rem;margin-bottom:0.8rem;">🚧</div>
+          <h3 class="project-name" style="color:var(--muted);">More Coming Soon</h3>
+          <p class="project-desc" style="margin-bottom:1rem;">Always building something new. Check GitHub for the latest.</p>
           <a href="https://github.com/tanveer-12?tab=repositories" target="_blank" class="project-link">
             All Repositories
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
           </a>
         </div>
       </div>
@@ -762,7 +769,7 @@
         </a>
         <a href="https://github.com/tanveer-12" target="_blank" class="contact-link">
           <span class="contact-link-icon">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49v-1.71c-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.27 10.27 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49v-1.71c-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.27 10.27 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
           </span>
           github.com/tanveer-12
         </a>
@@ -773,15 +780,13 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>Designed & built by <a href="https://github.com/tanveer-12">Tanveer Kaur</a> · <a href="https://github.com/tanveer-12">github.com/tanveer-12</a></p>
+  <p>Designed &amp; built by <a href="https://github.com/tanveer-12">Tanveer Kaur</a> &nbsp;·&nbsp; <a href="https://github.com/tanveer-12">github.com/tanveer-12</a></p>
 </footer>
 
 <script>
-  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.12 });
-
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
