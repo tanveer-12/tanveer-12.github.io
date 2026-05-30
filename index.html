@@ -3,25 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tanveer Kaur — Portfolio</title>
+<title>Tanveer Kaur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080810;
-    --surface: #0f0f1a;
-    --surface2: #13131f;
-    --border: #1c1c2e;
-    --border-hi: #2e2e4a;
-    --accent: #818cf8;
-    --accent2: #4f46e5;
-    --accent3: #a5b4fc;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --muted-hi: #94a3b8;
-    --code-bg: #0c0c18;
-    --glow: rgba(79,70,229,0.14);
-    --glow-hi: rgba(129,140,248,0.12);
+    --bg: #faf9f7;
+    --surface: #f4f2ee;
+    --surface2: #eceae4;
+    --border: #e0ddd6;
+    --border-hi: #a8a49b;
+    --text: #1a1917;
+    --muted: #4a4845;
+    --muted-hi: #1f1e1c;
+    --warm: #8c7355;
+    --warm-hi: #5c4a32;
+    --green: #2d6a4f;
+    --green-light: #e8f4ef;
+    --green-mid: #52b788;
+    --rust: #c1440e;
+    --rust-light: #fdf0eb;
+  --sec-a: #faf9f7;
+  --sec-b: #f2f0eb;
+  --sec-c: #edeae3;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,19 +34,9 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Geist', sans-serif;
+    font-weight: 300;
     overflow-x: hidden;
-  }
-
-  /* Subtle grain */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-    opacity: 0.25;
   }
 
   /* ---- NAV ---- */
@@ -50,744 +44,1262 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 1.2rem 3rem;
+    padding: 1.4rem 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(8,8,16,0.75);
-    backdrop-filter: blur(20px);
+    background: rgba(250,249,247,0.94);
+    backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s ease;
   }
 
+  nav.scrolled { box-shadow: 0 1px 24px rgba(0,0,0,0.06); }
+
   .nav-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.9rem;
-    color: var(--accent3);
-    letter-spacing: 0.06em;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.01em;
+    text-decoration: none;
   }
 
   .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 2.8rem;
     list-style: none;
   }
 
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 0; height: 1px;
+    background: var(--green);
+    transition: width 0.25s ease;
   }
 
   .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
 
   /* ---- HERO ---- */
   #hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 0 4rem;
+    border-bottom: 1px solid var(--border);
     position: relative;
-    padding: 6rem 3rem 3rem;
-    text-align: center;
+    overflow: hidden;
   }
 
-  .hero-bg-orb {
+  /* Subtle color wash top-right */
+  #hero::after {
+    content: '';
     position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
+    top: -120px; right: -80px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle at center, rgba(45,106,79,0.06) 0%, transparent 65%);
     pointer-events: none;
   }
 
-  .orb1 {
-    width: 480px; height: 480px;
-    background: radial-gradient(circle, rgba(79,70,229,0.22), transparent 70%);
-    top: -80px; left: 50%;
-    transform: translateX(-50%);
-    animation: pulse 7s ease-in-out infinite;
+  .hero-inner {
+    max-width: 800px;
+    padding-top: 5rem;
+    position: relative;
+    z-index: 1;
   }
 
-  .orb2 {
-    width: 260px; height: 260px;
-    background: radial-gradient(circle, rgba(129,140,248,0.1), transparent 70%);
-    bottom: 120px; right: 8%;
-    animation: pulse2 9s ease-in-out infinite;
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: rise 0.8s 0.1s ease forwards;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 0.7; transform: scale(1) translateX(-50%); }
-    50% { opacity: 1; transform: scale(1.08) translateX(-50%); }
-  }
-  @keyframes pulse2 {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 0.9; transform: scale(1.12); }
-  }
-
-  .hero-content { position: relative; z-index: 2; max-width: 820px; }
-
-  .hero-tag {
-    display: inline-block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent3);
-    border: 1px solid var(--border-hi);
-    padding: 0.3rem 1rem;
-    border-radius: 999px;
-    letter-spacing: 0.1em;
-    margin-bottom: 1.8rem;
-    animation: fadeUp 0.8s ease both;
-    background: rgba(129,140,248,0.06);
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--green);
+    opacity: 0.6;
   }
 
   .hero-name {
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.04;
-    letter-spacing: -0.03em;
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.2rem);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
     color: var(--text);
-    animation: fadeUp 0.8s 0.1s ease both;
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: rise 0.8s 0.2s ease forwards;
   }
 
-  .hero-name span {
-    /* indigo gradient, less purple-saturated */
-    background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 40%, #6366f1 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .hero-name em {
+    font-style: italic;
+    color: var(--warm);
   }
 
-  .hero-subtitle {
-    font-size: 1.1rem;
+  .hero-degree {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 300;
     color: var(--muted-hi);
-    margin: 1.4rem 0 2.8rem;
-    line-height: 1.75;
-    animation: fadeUp 0.8s 0.2s ease both;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: rise 0.8s 0.28s ease forwards;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.85;
+    max-width: 540px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: rise 0.8s 0.36s ease forwards;
   }
 
   .hero-ctas {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
+    gap: 0.9rem;
     flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.3s ease both;
+    opacity: 0;
+    animation: rise 0.8s 0.44s ease forwards;
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.8rem;
-    border-radius: 8px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 700;
+    padding: 0.68rem 1.4rem;
+    font-family: 'Geist', sans-serif;
+    font-size: 0.79rem;
+    font-weight: 400;
     text-decoration: none;
     transition: all 0.2s;
     cursor: pointer;
     border: none;
+    letter-spacing: 0.03em;
+    border-radius: 2px;
   }
 
   .btn-primary {
-    background: var(--accent2);
-    color: #e0e7ff;
-    box-shadow: 0 0 28px rgba(79,70,229,0.3);
+    background: var(--green);
+    color: #fff;
   }
 
   .btn-primary:hover {
-    background: #4338ca;
-    box-shadow: 0 0 44px rgba(79,70,229,0.45);
-    transform: translateY(-2px);
+    background: #235c42;
+    transform: translateY(-1px);
   }
 
-  .btn-outline {
+  .btn-ghost {
     background: transparent;
     color: var(--muted-hi);
     border: 1px solid var(--border-hi);
   }
 
-  .btn-outline:hover {
-    border-color: var(--accent);
+  .btn-ghost:hover {
+    border-color: var(--text);
     color: var(--text);
-    background: var(--glow-hi);
-    transform: translateY(-2px);
+    background: var(--surface);
+    transform: translateY(-1px);
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0;
+    animation: rise 1s 0.9s ease forwards;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--border-hi);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ---- SECTIONS ---- */
-  section {
-    padding: 5rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
+  /* ---- SECTION LAYOUT ---- */
+  .section {
+    border-bottom: 1px solid var(--border);
   }
 
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.7rem;
-    opacity: 0.85;
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 5.5rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    flex-shrink: 0;
+    padding-top: 0.35rem;
   }
 
   .section-title {
-    font-size: clamp(2rem, 4vw, 2.6rem);
-    font-weight: 800;
-    letter-spacing: -0.025em;
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.015em;
     color: var(--text);
-    margin-bottom: 0.4rem;
+    line-height: 1.1;
   }
 
-  .section-divider {
-    width: 48px;
-    height: 2px;
-    background: linear-gradient(to right, var(--accent2), var(--accent));
-    border-radius: 2px;
-    margin: 1rem 0 2.8rem;
-    opacity: 0.7;
+  /* ---- REVEAL ANIMATIONS ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
   }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+
+  /* Animated underline on section titles */
+  .title-underline {
+    display: inline-block;
+    position: relative;
+  }
+
+  .title-underline::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 1.5px;
+    background: var(--green);
+    transition: width 0.6s cubic-bezier(0.22,1,0.36,1) 0.3s;
+  }
+
+  .reveal.visible .title-underline::after { width: 100%; }
 
   /* ---- ABOUT ---- */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 5rem;
     align-items: start;
   }
 
   .about-text p {
-    color: var(--muted-hi);
+    color: var(--text);
     line-height: 1.9;
-    font-size: 0.97rem;
-    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
   }
 
-  .about-text strong { color: var(--text); font-weight: 600; }
-  .about-text em { color: var(--accent3); font-style: normal; }
-
-  .about-code {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.6rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.76rem;
-    line-height: 1.85;
-    color: #a5b4fc;
-    position: relative;
-    overflow: hidden;
+  .about-text strong {
+    color: var(--text);
+    font-weight: 500;
   }
 
-  .about-code::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1.5px;
-    background: linear-gradient(to right, var(--accent2), var(--accent));
-    opacity: 0.6;
+  .about-text .highlight {
+    color: var(--green);
+    font-weight: 400;
   }
 
-  .code-comment { color: #334155; }
-  .code-keyword { color: #f472b6; }
-  .code-string  { color: #86efac; }
-  .code-var     { color: #7dd3fc; }
-
-  /* ---- SKILLS ---- */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.2rem;
-  }
-
-  .skill-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.4rem;
-    transition: all 0.22s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skill-card:hover {
-    border-color: var(--border-hi);
-    background: var(--surface2);
-    transform: translateY(-2px);
-  }
-
-  .skill-category {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    color: var(--muted-hi);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .skill-badges { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-
-  .badge {
-    background: rgba(99,102,241,0.1);
-    border: 1px solid rgba(129,140,248,0.18);
-    color: var(--accent3);
-    padding: 0.28rem 0.65rem;
-    border-radius: 5px;
-    font-size: 0.76rem;
-    font-weight: 600;
-  }
-
-  /* ---- PROJECTS ---- */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.6rem;
-  }
-
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.8rem;
+  .about-meta {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
+    gap: 0.55rem;
   }
 
-  .project-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1.5px;
-    background: var(--card-line, linear-gradient(to right, var(--accent2), var(--accent)));
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-    transform-origin: left;
-  }
-
-  .project-card:hover {
-    border-color: var(--border-hi);
-    background: var(--surface2);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-  }
-
-  .project-card:hover::after { transform: scaleX(1); }
-
-  /* Per-card accent lines */
-  .project-card:nth-child(1) { --card-line: linear-gradient(to right, #4f46e5, #818cf8); }
-  .project-card:nth-child(2) { --card-line: linear-gradient(to right, #0ea5e9, #38bdf8); }
-  .project-card:nth-child(3) { --card-line: linear-gradient(to right, #10b981, #34d399); }
-  .project-card:nth-child(4) { --card-line: linear-gradient(to right, #f59e0b, #fbbf24); }
-
-  .project-icon {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    line-height: 1;
-  }
-
-  .project-name {
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin-bottom: 0.55rem;
-    color: var(--text);
-    letter-spacing: -0.01em;
-  }
-
-  .project-desc {
-    font-size: 0.86rem;
-    color: var(--muted);
-    line-height: 1.75;
-    flex: 1;
-    margin-bottom: 1.2rem;
-  }
-
-  .project-tags {
+  .about-meta-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .project-tag {
-    background: rgba(99,102,241,0.07);
-    border: 1px solid rgba(129,140,248,0.12);
-    color: var(--muted-hi);
-    padding: 0.2rem 0.55rem;
-    border-radius: 4px;
-    font-size: 0.71rem;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .project-link {
-    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    color: var(--accent);
-    font-size: 0.8rem;
-    font-weight: 700;
+    gap: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 300;
+    color: var(--muted-hi);
+    letter-spacing: 0.05em;
+  }
+
+  .about-meta-row a {
+    color: var(--muted-hi);
     text-decoration: none;
-    letter-spacing: 0.04em;
     transition: color 0.2s;
   }
 
-  .project-link:hover { color: var(--text); }
-  .project-link svg { transition: transform 0.2s; }
-  .project-link:hover svg { transform: translate(2px, -2px); }
+  .about-meta-row a:hover { color: var(--green); }
 
-  /* ---- CONTACT ---- */
-  #contact { text-align: center; padding-bottom: 6rem; }
-
-  .contact-card {
-    max-width: 520px;
-    margin: 0 auto;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 3rem;
-    position: relative;
-    overflow: hidden;
+  .about-meta-row::before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 1px;
+    background: var(--border-hi);
+    flex-shrink: 0;
   }
 
-  .contact-card::before {
+  .about-code-block {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--green);
+    border-radius: 3px;
+    padding: 1.8rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.71rem;
+    line-height: 2;
+    color: var(--muted-hi);
+    font-weight: 300;
+    transition: border-color 0.3s ease;
+  }
+
+  .about-code-block:hover {
+    border-left-color: var(--warm);
+  }
+
+  .code-ln { display: flex; gap: 1.5rem; }
+  .code-lnum {
+    color: var(--muted);
+    user-select: none;
+    flex-shrink: 0;
+    width: 1.4rem;
+    text-align: right;
+  }
+
+  .kw  { color: var(--green); }
+  .st  { color: var(--warm-hi); }
+  .cm  { color: var(--muted); font-style: italic; }
+  .fn  { color: var(--text); font-weight: 500; }
+
+  /* ---- EXPERIENCE ---- */
+  .exp-list { display: flex; flex-direction: column; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2.5rem;
+    padding: 2.2rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .exp-item:first-child { border-top: 1px solid var(--border); }
+
+  .exp-left { display: flex; flex-direction: column; gap: 0.35rem; padding-top: 0.1rem; }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+  }
+
+  .exp-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 400;
+    padding: 0.18rem 0.55rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    width: fit-content;
+  }
+
+  .exp-tag.research { background: var(--green-light); color: var(--green); }
+  .exp-tag.industry  { background: var(--rust-light);  color: var(--rust); }
+  .exp-tag.grad      { background: #f0ede8;            color: var(--warm-hi); }
+
+  .exp-right { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .exp-role {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .exp-org {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--muted-hi);
+    margin-bottom: 0.6rem;
+  }
+
+  .exp-org strong { color: var(--muted-hi); font-weight: 500; }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-top: 0.2rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.84rem;
+    font-weight: 300;
+    color: var(--muted-hi);
+    line-height: 1.75;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
     content: '';
     position: absolute;
-    top: -60px; left: 50%;
-    transform: translateX(-50%);
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(79,70,229,0.12), transparent 70%);
-    pointer-events: none;
+    left: 0;
+    top: 0.62em;
+    width: 4px;
+    height: 1px;
+    background: var(--border-hi);
   }
 
-  .contact-card p {
+  /* ---- SKILLS ---- */
+  .skills-table { width: 100%; border-collapse: collapse; }
+
+  .skills-table tr { border-bottom: 1px solid var(--border); }
+  .skills-table tr:first-child { border-top: 1px solid var(--border); }
+
+  .skill-row-label {
+    padding: 1.4rem 2rem 1.4rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 180px;
+    vertical-align: top;
+    padding-top: 1.6rem;
+  }
+
+  .skill-row-badges { padding: 1.4rem 0; vertical-align: top; }
+
+  .badges-wrap { display: flex; flex-wrap: wrap; gap: 0.4rem; padding-top: 0.15rem; }
+
+  .badge {
+    padding: 0.25rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 300;
     color: var(--muted-hi);
-    margin-bottom: 2rem;
-    line-height: 1.75;
-    font-size: 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    background: #fff;
+    font-family: 'Geist', sans-serif;
+    letter-spacing: 0.01em;
+    transition: all 0.18s;
+    cursor: default;
   }
 
-  .contact-links { display: flex; flex-direction: column; gap: 0.9rem; }
+  .badge:hover {
+    border-color: var(--green-mid);
+    color: var(--green);
+    background: var(--green-light);
+  }
+
+  /* ---- PROJECTS ---- */
+  .projects-list { display: flex; flex-direction: column; }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: 2fr 1.1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding: 2.2rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.18s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .project-row:first-child { border-top: 1px solid var(--border); }
+
+  /* Green left accent that slides in on hover */
+  .project-row::before {
+    content: '';
+    position: absolute;
+    left: -4rem;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--green);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .project-row:hover::before { transform: scaleY(1); }
+  .project-row:hover .proj-name { color: var(--green); }
+  .project-row:hover .proj-arrow { transform: translate(3px,-3px); opacity: 1; }
+
+  .proj-left { display: flex; flex-direction: column; gap: 0.55rem; }
+
+  .proj-index {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .proj-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    transition: color 0.2s;
+    line-height: 1.2;
+  }
+
+  .proj-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--green);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    background: var(--green-light);
+    padding: 0.18rem 0.6rem;
+    border-radius: 2px;
+    width: fit-content;
+  }
+
+  .proj-status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+
+  .proj-desc {
+    font-size: 0.84rem;
+    font-weight: 300;
+    color: var(--muted-hi);
+    line-height: 1.78;
+  }
+
+  .proj-mid { padding-top: 1.6rem; }
+
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  .proj-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.61rem;
+    font-weight: 300;
+    color: var(--muted-hi);
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    background: transparent;
+    transition: all 0.18s;
+  }
+
+  .project-row:hover .proj-tag {
+    border-color: rgba(45,106,79,0.25);
+  }
+
+  .proj-right {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+  }
+
+  .proj-arrow {
+    font-size: 1rem;
+    color: var(--muted);
+    opacity: 0.4;
+    transition: all 0.22s;
+    display: inline-block;
+  }
+
+  /* ---- EDUCATION ---- */
+  .edu-list { display: flex; flex-direction: column; }
+
+  .edu-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu-item:first-child { border-top: 1px solid var(--border); }
+
+  .edu-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-top: 0.1rem;
+  }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .edu-gpa {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    font-weight: 400;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    margin-top: 0.2rem;
+  }
+
+  .edu-right { display: flex; flex-direction: column; gap: 0.3rem; }
+
+  .edu-degree {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .edu-school {
+    font-size: 0.83rem;
+    color: var(--muted-hi);
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-courses {
+    font-size: 0.78rem;
+    color: var(--muted-hi);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .edu-courses strong { color: var(--muted-hi); font-weight: 400; }
+
+  /* ---- CONTACT ---- */
+  #contact .section-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-left p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 1rem;
+  }
+
+  .contact-right { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.2rem; }
 
   .contact-link {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.85rem 1.2rem;
-    background: var(--code-bg);
+    justify-content: space-between;
+    padding: 1.05rem 1.3rem;
     border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--muted-hi);
+    border-radius: 2px;
+    color: var(--text);
     text-decoration: none;
-    font-size: 0.88rem;
-    font-weight: 600;
-    transition: all 0.2s;
+    font-size: 0.84rem;
+    font-weight: 300;
+    transition: all 0.22s;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-link::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--green);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
   }
 
   .contact-link:hover {
-    border-color: var(--accent);
+    border-color: rgba(45,106,79,0.4);
     color: var(--text);
-    background: rgba(129,140,248,0.06);
-    transform: translateX(4px);
+    background: var(--green-light);
   }
 
-  .contact-link-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .contact-link:hover::before { transform: scaleY(1); }
+
+  .contact-link-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .contact-link-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-width: 52px;
+  }
 
   /* ---- FOOTER ---- */
   footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
-    text-align: center;
+    padding: 1.8rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span, footer a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    font-weight: 300;
     color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
   }
 
-  footer a { color: var(--accent); text-decoration: none; }
-  footer a:hover { color: var(--text); }
-
-  /* ---- SCROLL REVEAL ---- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  footer a:hover { color: var(--green); }
 
   /* ---- RESPONSIVE ---- */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    section { padding: 4rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    .hero-ctas { flex-direction: column; align-items: center; }
-    #hero { padding: 6rem 1.5rem 3rem; }
+  @media (max-width: 860px) {
+    nav { padding: 1.1rem 1.8rem; }
+    #hero { padding: 0 1.8rem; }
+    .hero-scroll { left: 1.8rem; }
+    .section-inner { padding: 4rem 1.8rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .project-row { grid-template-columns: 1fr; gap: 0.8rem; }
+    .proj-mid, .proj-right { padding-top: 0; }
+    .project-row::before { display: none; }
+    #contact .section-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+    .nav-links { gap: 1.4rem; }
+    .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.8rem; }
+    .exp-left, .edu-left { flex-direction: row; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+    .skill-row-label { width: 130px; font-size: 0.6rem; }
   }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <span class="nav-logo">// tanveer-12</span>
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Tanveer Kaur</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#projects">Work</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section id="hero" style="padding-top:0;max-width:100%;padding-bottom:0;">
-  <div class="hero-bg-orb orb1"></div>
-  <div class="hero-bg-orb orb2"></div>
-  <div class="hero-content">
-    <span class="hero-tag">👋 Open to Collaboration &amp; Open Source</span>
-    <h1 class="hero-name">Tanveer <span>Kaur</span></h1>
-    <p class="hero-subtitle">
-      ML Enthusiast &nbsp;·&nbsp; Systems Builder &nbsp;·&nbsp; Lifelong Learner<br>
-      Building intelligent systems at the intersection of machine learning, inference, and C++.
+<section id="hero" class="section">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">MS Computer Science · AI · WPI</p>
+    <h1 class="hero-name">Tanveer<br><em>Kaur</em></h1>
+    <p class="hero-degree">Worcester Polytechnic Institute &nbsp;·&nbsp; Expected Dec 2026 &nbsp;·&nbsp; GPA 3.83</p>
+    <p class="hero-desc">
+      Building intelligent systems at the intersection of machine learning, inference, and systems programming. Research at WPI's RoboCare Lab. Interested in understanding things from first principles.
     </p>
     <div class="hero-ctas">
-      <a href="#projects" class="btn btn-primary">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
-        View Projects
-      </a>
-      <a href="https://github.com/tanveer-12" target="_blank" class="btn btn-outline">
-        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49v-1.71c-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.27 10.27 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
-        GitHub
-      </a>
-      <a href="mailto:tanveerkaur1292@outlook.com" class="btn btn-outline">
-        ✉️ Say Hello
-      </a>
+      <a href="#projects" class="btn btn-primary">View Work</a>
+      <a href="https://github.com/tanveer-12" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://linkedin.com/in/tanveer-kaur1292" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="mailto:tfnu@wpi.edu" class="btn btn-ghost">Email</a>
+    </div>
+  </div>
+  <span class="hero-scroll">Scroll to explore</span>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--sec-b)" class="section">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title"><span class="title-underline">About</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm Tanveer — an MS Computer Science student at WPI with a concentration in AI, and a Graduate Research Assistant at the <span class="highlight">RoboCare Lab</span>. I focus on machine learning, systems programming, and building things that hold up under the hood.
+        </p>
+        <p>
+          I believe in learning from first principles. Whether it's engineering a conversational pipeline for a social robot or training a DQN agent from scratch, I want to understand <strong>why</strong> things work — not just how to use them.
+        </p>
+        <p>
+          Currently exploring <strong>semantic search</strong>, <strong>reinforcement learning</strong>, <strong>LLM inference optimization</strong>, and <strong>systems programming in C/C++</strong>. Open to meaningful collaboration and open source contribution.
+        </p>
+        <div class="about-meta">
+          <div class="about-meta-row">Worcester, MA &nbsp;·&nbsp; United States</div>
+          <div class="about-meta-row"><a href="mailto:tfnu@wpi.edu">tfnu@wpi.edu</a> &nbsp;·&nbsp; (774) 486-2150</div>
+          <div class="about-meta-row"><a href="https://linkedin.com/in/tanveer-kaur1292" target="_blank">linkedin.com/in/tanveer-kaur1292</a></div>
+          <div class="about-meta-row">Open to collaboration &amp; research</div>
+        </div>
+      </div>
+      <div class="about-code-block">
+        <div class="code-ln"><span class="code-lnum">1</span><span class="cm"># a little about me</span></div>
+        <div class="code-ln"><span class="code-lnum">2</span><span></span></div>
+        <div class="code-ln"><span class="code-lnum">3</span><span><span class="kw">class</span> <span class="fn">Tanveer</span>:</span></div>
+        <div class="code-ln"><span class="code-lnum">4</span><span>&nbsp;&nbsp;role = <span class="st">"Grad Researcher @ WPI"</span></span></div>
+        <div class="code-ln"><span class="code-lnum">5</span><span>&nbsp;&nbsp;passion = [</span></div>
+        <div class="code-ln"><span class="code-lnum">6</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"ML Systems"</span>,</span></div>
+        <div class="code-ln"><span class="code-lnum">7</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"Reinforcement Learning"</span>,</span></div>
+        <div class="code-ln"><span class="code-lnum">8</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"LLM Inference"</span>,</span></div>
+        <div class="code-ln"><span class="code-lnum">9</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"Semantic Search"</span>,</span></div>
+        <div class="code-ln"><span class="code-lnum">10</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"C++ from scratch"</span>,</span></div>
+        <div class="code-ln"><span class="code-lnum">11</span><span>&nbsp;&nbsp;]</span></div>
+        <div class="code-ln"><span class="code-lnum">12</span><span>&nbsp;&nbsp;open_to = <span class="st">"Collaboration"</span></span></div>
+        <div class="code-ln"><span class="code-lnum">13</span><span></span></div>
+        <div class="code-ln"><span class="code-lnum">14</span><span>&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">get_coffee</span>(<span class="kw">self</span>):</span></div>
+        <div class="code-ln"><span class="code-lnum">15</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="st">"Always"</span></span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="reveal">
-    <p class="section-label">01 — About Me</p>
-    <h2 class="section-title">Who I Am</h2>
-    <div class="section-divider"></div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>Hey! I'm Tanveer — a developer with a deep love for machine learning, systems programming, and building things that actually work under the hood.</p>
-        <p>I believe in learning from first principles. Whether it's implementing gradient descent in raw C++ or designing a GPU-aware inference runtime, I like to understand <em>why</em> things work — not just how to use them.</p>
-        <p>I'm currently exploring <strong>semantic search systems</strong>, <strong>reinforcement learning</strong>, <strong>LLM inference optimization</strong>, and <strong>ML from scratch in C/C++</strong>. Always looking for meaningful open source projects to contribute to.</p>
-        <p style="color: var(--muted); font-size:0.83rem; font-family:'Space Mono',monospace; margin-top:1.5rem;">📍 United States &nbsp;·&nbsp; ✉️ tanveerkaur1292@outlook.com</p>
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--sec-c)" class="section">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title"><span class="title-underline">Experience</span></h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal reveal-delay-1">
+        <div class="exp-left">
+          <span class="exp-date">May 2025<br>Aug 2025</span>
+          <span class="exp-tag research">Research</span>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Graduate Research Assistant</div>
+          <div class="exp-org"><strong>WPI RoboCare Lab</strong> &nbsp;·&nbsp; Worcester, MA</div>
+          <ul class="exp-bullets">
+            <li>Built a full-stack patient data dashboard (Flask/Python) to securely store patient profiles consumed by the Pepper robot during live interactions, supporting real-world data collection at senior centers and hospitals.</li>
+            <li>Engineered the end-to-end conversational pipeline for Pepper: transcribed patient speech via Whisper API, routed input to OpenAI API with tuned system prompts for respectful patient-appropriate responses, and relayed robot speech back in real time — cutting page-load lag during active sessions.</li>
+          </ul>
+        </div>
       </div>
-      <div class="about-code">
-        <span class="code-comment"># a little bit about me</span><br><br>
-        <span class="code-keyword">class</span> <span class="code-var">Tanveer</span>:<br>
-        &nbsp;&nbsp;name = <span class="code-string">"Tanveer Kaur"</span><br>
-        &nbsp;&nbsp;passion = [<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"ML Systems"</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Reinforcement Learning"</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"LLM Inference"</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Semantic Search"</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"C++ from scratch"</span>,<br>
-        &nbsp;&nbsp;]<br>
-        &nbsp;&nbsp;currently = <span class="code-string">"Building cool things"</span><br>
-        &nbsp;&nbsp;open_to = <span class="code-string">"Collaboration 🤝"</span><br><br>
-        &nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-var">get_coffee</span>(<span class="code-keyword">self</span>):<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"Always ☕"</span>
+
+      <div class="exp-item reveal reveal-delay-2">
+        <div class="exp-left">
+          <span class="exp-date">July 2024<br>Dec 2024</span>
+          <span class="exp-tag industry">Industry</span>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Junior Project Engineer</div>
+          <div class="exp-org"><strong>Intellinez Systems</strong> &nbsp;·&nbsp; Chandigarh, India</div>
+          <ul class="exp-bullets">
+            <li>Revamped Practicelink's broadcast email system (serving thousands of candidates) by designing interactive templates with embedded action buttons and engineering C# backend controllers to capture click events.</li>
+            <li>Eliminated manual recruiter follow-up by deploying a scheduled job that processed click events and auto-triggered personalized SendGrid notification emails — turning a fully manual workflow into a zero-touch pipeline.</li>
+          </ul>
+        </div>
       </div>
+
+      <div class="exp-item reveal reveal-delay-3">
+        <div class="exp-left">
+          <span class="exp-date">June 2023<br>June 2024</span>
+          <span class="exp-tag industry">Industry</span>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Full Stack Web Developer</div>
+          <div class="exp-org"><strong>VOG Business Solutions</strong> &nbsp;·&nbsp; Amritsar, India</div>
+          <ul class="exp-bullets">
+            <li>Reduced Immigration CRM page-load latency by 25% by rewriting inefficient queries into optimized SQL stored procedures and views, improving daily usability for the recruiter-facing interface.</li>
+            <li>Delivered 3 production front-end features in 6 weeks and authored Figma designs and technical documentation that unblocked two subsequent development phases without additional design review cycles.</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
-  <div class="reveal">
-    <p class="section-label">02 — Skills</p>
-    <h2 class="section-title">Tech Stack</h2>
-    <div class="section-divider"></div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <p class="skill-category">🧪 Languages</p>
-        <div class="skill-badges">
-          <span class="badge">Python</span>
-          <span class="badge">C++</span>
-          <span class="badge">C</span>
-          <span class="badge">TypeScript</span>
-          <span class="badge">JavaScript</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <p class="skill-category">🤖 ML / AI</p>
-        <div class="skill-badges">
-          <span class="badge">PyTorch</span>
-          <span class="badge">HuggingFace</span>
-          <span class="badge">scikit-learn</span>
-          <span class="badge">CUDA</span>
-          <span class="badge">LoRA / PEFT</span>
-          <span class="badge">RAG</span>
-          <span class="badge">DQN / RL</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <p class="skill-category">🔧 Backend &amp; Data</p>
-        <div class="skill-badges">
-          <span class="badge">FastAPI</span>
-          <span class="badge">PostgreSQL</span>
-          <span class="badge">pgvector</span>
-          <span class="badge">Docker</span>
-          <span class="badge">REST APIs</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <p class="skill-category">📚 CS Fundamentals</p>
-        <div class="skill-badges">
-          <span class="badge">Data Structures</span>
-          <span class="badge">Algorithms</span>
-          <span class="badge">Operating Systems</span>
-          <span class="badge">Memory Management</span>
-        </div>
-      </div>
+<section id="skills" style="background:var(--sec-b)" class="section">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title"><span class="title-underline">Skills</span></h2>
     </div>
+    <table class="skills-table">
+      <tr>
+        <td class="skill-row-label">Languages</td>
+        <td class="skill-row-badges">
+          <div class="badges-wrap">
+            <span class="badge">Python</span>
+            <span class="badge">C#</span>
+            <span class="badge">C/C++</span>
+            <span class="badge">SQL</span>
+            <span class="badge">TypeScript</span>
+            <span class="badge">HTML5/CSS3</span>
+            <span class="badge">MATLAB</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-row-label">ML / AI</td>
+        <td class="skill-row-badges">
+          <div class="badges-wrap">
+            <span class="badge">PyTorch</span>
+            <span class="badge">HuggingFace</span>
+            <span class="badge">LangChain</span>
+            <span class="badge">LangGraph</span>
+            <span class="badge">RAG</span>
+            <span class="badge">DQN / RL</span>
+            <span class="badge">NumPy</span>
+            <span class="badge">Pandas</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-row-label">Frameworks</td>
+        <td class="skill-row-badges">
+          <div class="badges-wrap">
+            <span class="badge">FastAPI</span>
+            <span class="badge">Flask</span>
+            <span class="badge">React</span>
+            <span class="badge">Next.js</span>
+            <span class="badge">SQLModel</span>
+            <span class="badge">ASP.NET MVC</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-row-label">Infrastructure</td>
+        <td class="skill-row-badges">
+          <div class="badges-wrap">
+            <span class="badge">PostgreSQL</span>
+            <span class="badge">pgvector</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Kubernetes</span>
+            <span class="badge">AWS S3</span>
+            <span class="badge">Vector DBs</span>
+            <span class="badge">REST APIs</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-row-label">Tools</td>
+        <td class="skill-row-badges">
+          <div class="badges-wrap">
+            <span class="badge">Git / GitHub</span>
+            <span class="badge">Anthropic API</span>
+            <span class="badge">OpenAI API</span>
+            <span class="badge">Prometheus / Grafana</span>
+            <span class="badge">Figma</span>
+            <span class="badge">DVC</span>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects">
-  <div class="reveal">
-    <p class="section-label">03 — Projects</p>
-    <h2 class="section-title">What I've Built</h2>
-    <div class="section-divider"></div>
-    <div class="projects-grid">
+<section id="projects" style="background:var(--sec-c)" class="section">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title"><span class="title-underline">Work</span></h2>
+    </div>
+    <div class="projects-list">
 
-      <!-- 1. personal-knowledge-base -->
-      <div class="project-card">
-        <div class="project-icon">🔍</div>
-        <h3 class="project-name">Personal Knowledge Base</h3>
-        <p class="project-desc">Semantic note-taking app — write freely, find anything by meaning. Uses FastAPI + pgvector to store 384-dim embeddings for every text chunk, returning cosine-similar results with no keyword matching required.</p>
-        <div class="project-tags">
-          <span class="project-tag">TypeScript</span>
-          <span class="project-tag">FastAPI</span>
-          <span class="project-tag">pgvector</span>
-          <span class="project-tag">all-MiniLM-L6-v2</span>
-          <span class="project-tag">Semantic Search</span>
+      <!-- Lumia -->
+      <a href="https://github.com/tanveer-12/lumia" target="_blank" class="project-row">
+        <div class="proj-left">
+          <span class="proj-index">001</span>
+          <h3 class="proj-name">Lumia</h3>
+          <span class="proj-status">
+            <span class="proj-status-dot"></span>
+            In progress
+          </span>
+          <p class="proj-desc">A unified career intelligence system — users upload their resume, see where they stand in the live job market, get a week-by-week upskilling roadmap tailored to market demand, and apply to jobs without switching between a job board, chatbot, and learning platform. Data pipeline auto-discovers companies via ATS sitemap crawling, scraping and normalizing 3,000+ fresh jobs daily using async httpx with a hybrid rule-based + Groq LLM normalizer.</p>
         </div>
-        <a href="https://github.com/tanveer-12/personal-knowledge-base" target="_blank" class="project-link">
-          View on GitHub
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
+        <div class="proj-mid">
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">pgvector</span>
+            <span class="proj-tag">PostgreSQL</span>
+            <span class="proj-tag">FastAPI</span>
+            <span class="proj-tag">Docker</span>
+            <span class="proj-tag">Next.js</span>
+            <span class="proj-tag">Groq</span>
+            <span class="proj-tag">Anthropic Claude</span>
+          </div>
+        </div>
+        <div class="proj-right">
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
 
-      <!-- 2. dqn-offer-recommendation -->
-      <div class="project-card">
-        <div class="project-icon">🤖</div>
-        <h3 class="project-name">DQN Offer Recommendation</h3>
-        <p class="project-desc">Deep Q-Network agent for personalized offer recommendation. RL-based sequential decision-making for e-commerce, with replay buffer, target network, and custom reward shaping for click-through optimization.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">PyTorch</span>
-          <span class="project-tag">DQN</span>
-          <span class="project-tag">Reinforcement Learning</span>
+      <!-- Personal Knowledge Base -->
+      <a href="https://github.com/tanveer-12/personal-knowledge-base" target="_blank" class="project-row">
+        <div class="proj-left">
+          <span class="proj-index">002</span>
+          <h3 class="proj-name">Personal Knowledge Base</h3>
+          <p class="proj-desc">Semantic note-taking application — write freely, retrieve by meaning. Uses all-MiniLM-L6-v2 to encode free-form text into 384-dim L2-normalized embeddings stored in pgvector, achieving sub-100ms cosine similarity search with no keyword overlap required. Chunking + CTE deduplication pipeline surfaces the single best-matching chunk per note ranked by cosine distance.</p>
         </div>
-        <a href="https://github.com/tanveer-12/dqn-offer-recommendation" target="_blank" class="project-link">
-          View on GitHub
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
+        <div class="proj-mid">
+          <div class="proj-tags">
+            <span class="proj-tag">TypeScript</span>
+            <span class="proj-tag">FastAPI</span>
+            <span class="proj-tag">pgvector</span>
+            <span class="proj-tag">all-MiniLM-L6-v2</span>
+            <span class="proj-tag">Next.js</span>
+            <span class="proj-tag">Docker</span>
+          </div>
+        </div>
+        <div class="proj-right">
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
 
-      <!-- 3. rl-breakout-dqn -->
-      <div class="project-card">
-        <div class="project-icon">🕹️</div>
-        <h3 class="project-name">RL Breakout DQN</h3>
-        <p class="project-desc">Classic Atari Breakout solved with Deep Q-Learning. A convolutional neural net processes raw pixel frames directly, trained end-to-end using experience replay and an ε-greedy exploration strategy.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">PyTorch</span>
-          <span class="project-tag">OpenAI Gym</span>
-          <span class="project-tag">CNN</span>
-          <span class="project-tag">DQN</span>
+      <!-- DQN Offer Recommendation -->
+      <a href="https://github.com/tanveer-12/dqn-offer-recommendation" target="_blank" class="project-row">
+        <div class="proj-left">
+          <span class="proj-index">003</span>
+          <h3 class="proj-name">DQN Offer Recommendation</h3>
+          <p class="proj-desc">Double DQN agent trained on 10,000 simulated customer episodes with a 5-feature state space to recommend 1 of 5 offers, achieving 71.9% loyalty conversion and $351 avg. revenue/customer — outperforming a rule-based baseline across all 12-month simulations. Discovered the "no offer" strategy for high-loyalty customers entirely without explicit programming, demonstrating long-horizon planning via γ=0.99 Bellman optimization.</p>
         </div>
-        <a href="https://github.com/tanveer-12/rl-breakout-dqn" target="_blank" class="project-link">
-          View on GitHub
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
+        <div class="proj-mid">
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">PyTorch</span>
+            <span class="proj-tag">OpenAI Gym</span>
+            <span class="proj-tag">Flask</span>
+            <span class="proj-tag">TypeScript</span>
+          </div>
+        </div>
+        <div class="proj-right">
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
 
-      <!-- 4. aegis-runtime -->
-      <div class="project-card">
-        <div class="project-icon">⚡</div>
-        <h3 class="project-name">Aegis Runtime</h3>
-        <p class="project-desc">A modular, GPU-aware adaptive inference system for large language models. Dynamically adjusts compute strategy based on available hardware — designed for efficient deployment of large models with a pluggable backend architecture.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">CUDA</span>
-          <span class="project-tag">LLM Inference</span>
-          <span class="project-tag">GPU</span>
+      <!-- OS Simulator -->
+      <a href="https://github.com/tanveer-12/os-simulator" target="_blank" class="project-row">
+        <div class="proj-left">
+          <span class="proj-index">004</span>
+          <h3 class="proj-name">OS Simulator</h3>
+          <span class="proj-status">
+            <span class="proj-status-dot"></span>
+            In progress
+          </span>
+          <p class="proj-desc">A systems-level operating system simulator built from scratch in C/C++. Exploring process scheduling, memory management, and kernel primitives — a hands-on study of how operating systems actually work beneath the surface.</p>
         </div>
-        <a href="https://github.com/tanveer-12/aegis-runtime" target="_blank" class="project-link">
-          View on GitHub
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-
-      <!-- More coming soon -->
-      <div class="project-card" style="border-style:dashed;display:flex;align-items:center;justify-content:center;text-align:center;min-height:200px;">
-        <div>
-          <div style="font-size:1.6rem;margin-bottom:0.8rem;">🚧</div>
-          <h3 class="project-name" style="color:var(--muted);">More Coming Soon</h3>
-          <p class="project-desc" style="margin-bottom:1rem;">Always building something new. Check GitHub for the latest.</p>
-          <a href="https://github.com/tanveer-12?tab=repositories" target="_blank" class="project-link">
-            All Repositories
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </a>
+        <div class="proj-mid">
+          <div class="proj-tags">
+            <span class="proj-tag">C</span>
+            <span class="proj-tag">C++</span>
+            <span class="proj-tag">Systems</span>
+            <span class="proj-tag">OS Internals</span>
+          </div>
         </div>
-      </div>
+        <div class="proj-right">
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
 
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="reveal">
-    <p class="section-label">04 — Contact</p>
-    <h2 class="section-title">Let's Connect</h2>
-    <div class="section-divider" style="margin-left:auto;margin-right:auto;"></div>
-    <div class="contact-card">
-      <p>I'm always open to interesting conversations, collaborations, or just a friendly message. Whether you want to talk ML, open source, or cool projects — reach out!</p>
-      <div class="contact-links">
-        <a href="mailto:tanveerkaur1292@outlook.com" class="contact-link">
-          <span class="contact-link-icon">✉️</span>
-          tanveerkaur1292@outlook.com
-        </a>
-        <a href="https://github.com/tanveer-12" target="_blank" class="contact-link">
-          <span class="contact-link-icon">
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49v-1.71c-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.27 10.27 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
-          </span>
-          github.com/tanveer-12
-        </a>
+<!-- EDUCATION -->
+<section id="education" style="background:var(--sec-b)" class="section">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title"><span class="title-underline">Education</span></h2>
+    </div>
+    <div class="edu-list">
+
+      <div class="edu-item">
+        <div class="edu-left">
+          <span class="edu-year">Expected Dec 2026</span>
+          <span class="edu-gpa">GPA 3.83 / 4.0</span>
+        </div>
+        <div class="edu-right">
+          <div class="edu-degree">MS Computer Science <em style="font-style:normal;color:var(--green);font-size:0.9rem;">(AI Concentration)</em></div>
+          <div class="edu-school">Worcester Polytechnic Institute &nbsp;·&nbsp; Worcester, MA</div>
+          <div class="edu-courses"><strong>Courses:</strong> Machine Learning · Natural Language Processing · Deep Learning · Reinforcement Learning · Data Structures & Algorithms · Operating Systems · RDBMS · Software Engineering</div>
+        </div>
       </div>
+
+      <div class="edu-item">
+        <div class="edu-left">
+          <span class="edu-year">Aug 2020<br>June 2024</span>
+          <span class="edu-gpa">GPA 3.46 / 4.0</span>
+        </div>
+        <div class="edu-right">
+          <div class="edu-degree">B.Tech in Electronics and Computer Engineering</div>
+          <div class="edu-school">Guru Nanak Dev University &nbsp;·&nbsp; Amritsar, India</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Activities -->
+    <div style="margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);">
+      <p style="font-family:'DM Mono',monospace;font-size:0.63rem;font-weight:400;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1.4rem;">Activities &amp; Leadership</p>
+      <div style="display:flex;flex-direction:column;gap:0.7rem;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:0.85rem;color:var(--text);font-weight:300;">
+          <span>Treasurer — <strong style="font-weight:500;color:var(--text);">Women in Robotics Engineering (WIRE)</strong>, WPI</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.63rem;color:var(--muted);">May–Dec 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:0.85rem;color:var(--text);font-weight:300;">
+          <span>Member — <strong style="font-weight:500;color:var(--text);">Women in STEM Book Club</strong>, WPI</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.63rem;color:var(--muted);">Aug 2025–Present</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:0.85rem;color:var(--text);font-weight:300;">
+          <span>Participant — <strong style="font-weight:500;color:var(--text);">Hack for Human Impact</strong> Hackathon, WPI</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.63rem;color:var(--muted);">Nov 2025</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--sec-c)" class="section">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title"><span class="title-underline">Let's Connect</span></h2>
+    </div>
+    <div class="contact-left">
+      <p>I'm always open to interesting conversations, collaborations, or just a friendly note. Whether you want to talk ML, robotics, open source, or an idea you're building — reach out.</p>
+      <p>The best way to reach me is by email.</p>
+    </div>
+    <div class="contact-right">
+      <a href="mailto:tfnu@wpi.edu" class="contact-link">
+        <span class="contact-link-label">
+          <span class="contact-link-type">Email</span>
+          tfnu@wpi.edu
+        </span>
+        <span>↗</span>
+      </a>
+      <a href="mailto:tanveerkaur1292@outlook.com" class="contact-link">
+        <span class="contact-link-label">
+          <span class="contact-link-type">Alt</span>
+          tanveerkaur1292@outlook.com
+        </span>
+        <span>↗</span>
+      </a>
+      <a href="https://linkedin.com/in/tanveer-kaur1292" target="_blank" class="contact-link">
+        <span class="contact-link-label">
+          <span class="contact-link-type">LinkedIn</span>
+          tanveer-kaur1292
+        </span>
+        <span>↗</span>
+      </a>
+      <a href="https://github.com/tanveer-12" target="_blank" class="contact-link">
+        <span class="contact-link-label">
+          <span class="contact-link-type">GitHub</span>
+          github.com/tanveer-12
+        </span>
+        <span>↗</span>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>Designed &amp; built by <a href="https://github.com/tanveer-12">Tanveer Kaur</a> &nbsp;·&nbsp; <a href="https://github.com/tanveer-12">github.com/tanveer-12</a></p>
+  <span>© 2025 Tanveer Kaur</span>
+  <a href="https://github.com/tanveer-12" target="_blank">github.com/tanveer-12</a>
 </footer>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
 </script>
 
 </body>
